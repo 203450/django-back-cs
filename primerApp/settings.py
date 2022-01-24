@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     #Componentes agregados
     'primerComponente',
     'Loggin',
-    'Registro'
+    'Registro',
 ]
 
 REST_FRAMEWORK = {
