@@ -3,6 +3,11 @@ from django.contrib.auth.models import User
 from rest_framework import routers, serializers, viewsets
 from Registro.api import UserAPI
 
+#Direccionamiento y acondicionamiento de URL
+
+from django.views.static import serve
+from django.conf import settings
+
 # Serializers define the API representation.
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
@@ -24,7 +29,11 @@ urlpatterns = [
     path('', include(router.urls)),
     re_path(r'^api/v1/login', include('Loggin.urls')),
     re_path(r'^api/v1/primer_componente/', include('primerComponente.urls')),
-    #URL registro de usuarios
+    #URL de registro de usuarios
     re_path(r'^api/v1/create_user/', UserAPI.as_view(), name = "api_create_user"),
+    #URL de carga de archivos
+    re_path(r'^api/v1/load_image/', include('loadimage.urls')),
+    #URL de visualización de archivos
+    re_path(r'assets/(?P<path>.*)$',serve,{'document_root':settings.MEDIA_ROOT}),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]
