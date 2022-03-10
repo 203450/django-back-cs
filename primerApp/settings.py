@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 #Direccionamiento de URL
 
-MEDIA_URL = '/assets/'
+MEDIA_URL = '/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'assets')
 
 
@@ -33,7 +33,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'Loggin',
     'Registro',
     'loadimage',
+    'UserProfile',
 ]
 
 REST_FRAMEWORK = {
@@ -72,7 +73,14 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
+
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000/',
+]
+
+
 
 ROOT_URLCONF = 'primerApp.urls'
 

@@ -15,8 +15,11 @@ class LoginAuth(ObtainAuthToken):
         user=serializer.validated_data['user']
         token,create=Token.objects.get_or_create(user=user)
 
+        print(user.pk)
+
         return Response({
             'token':token.key,
+            'username':user.username,
             'user_id':user.pk,
             'email':user.email
         })
