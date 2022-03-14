@@ -106,18 +106,22 @@ class DataProfileDetail(APIView):
         return("No se encontró el usuario")
     
     def put(self, request, pk, format=None):
-        print(request.data)
-        print(request.data)
-        print(request.data)
-
-        data = request.data
         
-
+        data = request.data
         user = User.objects.filter(id = pk)
-        user.update(username = data.get('username'))
-        user.update(first_name = data.get('first_name'))
-        user.update(last_name = data.get('last_name'))
-        user.update(email = data.get('email'))
+
+        if(data.get("first_name") != ""):
+            user.update(first_name = data.get('first_name'))
+        
+        if(data.get("last_name") != ""):
+            user.update(last_name = data.get('last_name'))
+
+        if(data.get("username") != ""):
+            user.update(username = data.get('username'))
+
+        if(data.get("email") != ""):
+            user.update(email = data.get('email'))
+            
         user2 = User.objects.filter(id=pk).values()
         return Response(self.res_custom(user2, status.HTTP_200_OK))
 
