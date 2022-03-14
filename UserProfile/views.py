@@ -121,3 +121,5 @@ class DataProfileDetail(APIView):
         user2 = User.objects.filter(id=pk).values()
         return Response(self.res_custom(user2, status.HTTP_200_OK))
 
+    
+
