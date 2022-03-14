@@ -13,6 +13,7 @@ from UserProfile.models import TableProfile
 from UserProfile.serializers import TableProfileSerializer
 
 # Create your views here.
+
 class TableProfileList(APIView):
 
     def get_objectUser(self, idUser):
@@ -60,12 +61,18 @@ class TableProfileDetail(APIView):
 
     def get(self, request, pk, format=None):
         idResponse = self.get_object(pk)
+        user = User.objects.filter(id=pk).values()
         if idResponse != 404:
             idResponse = TableProfileSerializer(idResponse)
-            user = User.objects.filter(id=pk).values()
             responseOK = self.res_custom(user,idResponse.data,status.HTTP_200_OK)
             return Response(responseOK)
-        return Response("No hay datos", status = status.HTTP_400_BAD_REQUEST)
+        else:
+            errorData={
+                "url_image": "/img/Default.jpg",
+                "id_user" : pk,  
+            }
+        responseOK = self.res_custom(user, errorData,status.HTTP_400_BAD_REQUEST)
+        return Response(responseOK)
 
     def put(self, request, pk, format=None):
         idResponse = self.get_object(pk)

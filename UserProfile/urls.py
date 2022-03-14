@@ -4,6 +4,8 @@ from django.conf import settings
 
 from UserProfile.views import TableProfileList, TableProfileDetail, DataProfileDetail
 
+#Urls hijas
+
 urlpatterns = [
     re_path(r'^profile$', TableProfileList.as_view()),
     re_path(r'^profile/(?P<pk>\d+)$', TableProfileDetail.as_view()),

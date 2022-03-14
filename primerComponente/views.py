@@ -8,8 +8,8 @@ from primerComponente.models import PrimerTabla
 
 #Importación de serializadores
 from primerComponente.serializers import PrimerTablaSerializer
-# Create your views here.
 
+# Create your views here.
 class PrimerTablaList(APIView):
     def get(self, request, format=None):
         queryset=PrimerTabla.objects.all()
